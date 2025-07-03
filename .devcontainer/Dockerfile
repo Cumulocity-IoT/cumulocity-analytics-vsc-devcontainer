@@ -22,7 +22,11 @@ USER root
 RUN ln -s ${APAMA_WORK}/apama-analytics-builder-block-sdk /apama-analytics-builder-block-sdk \
   && ln -s ${APAMA_WORK}/apama-eplapps-tools /apama-eplapps-tools
 
+RUN apt-get update && apt-get install build-essential -y
+
 USER apama
+ENV ANALYTICS_BUILDER_SDK=/workspaces/apama-analytics-builder-block-sdk
+ENV PATH="/apama-eplapps-tools/scripts:/apama-analytics-builder-block-sdk:${PATH}"
 WORKDIR "/workspaces"
 
 ENV SHELL=/bin/bash
